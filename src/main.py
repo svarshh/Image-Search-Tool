@@ -62,6 +62,3 @@ def check_match(match):
 
 
 store_image_data(r'.')
-paths = check_match("io")
-for p in paths:
-    print(p)
