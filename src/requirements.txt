@@ -1,0 +1,5 @@
+dnspython==2.8.0
+packaging==25.0
+pillow==11.3.0
+pymongo==4.15.2
+pytesseract==0.3.13
