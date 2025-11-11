@@ -18,15 +18,19 @@ def get_sha256(image):
 
 # given a path, return all png, jpeg and jpg files
 def get_images(path):
+    # print(path)
     images = []
     for root, _, files in os.walk(path):
+        print(root)
         for f in files:
+            print(f)
             if f.endswith('.png') or f.endswith('jpeg') or f.endswith('.jpg'):
                 images.append(os.path.join(root, f))
     return images
 
 # given a path, store all the image text data in a database if it doesn't already exist
 def store_image_data(path):
+    # print("storing")
     
     client = MongoClient("mongodb://localhost:27017/")
     db = client["mydatabase"]
@@ -38,6 +42,8 @@ def store_image_data(path):
         sha = get_sha256(image)
         doc = list(collection.find({'_id':sha}))
         if not doc:
+            print("trying to insert ")
+            print(sha)
             text_data = pytesseract.image_to_string(Image.open(image))
             document = {
                 "_id" : sha,
@@ -64,5 +70,3 @@ def check_match(match):
     return paths
 
 
-
-# store_image_data(r'.')
